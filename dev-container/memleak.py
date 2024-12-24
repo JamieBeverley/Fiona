@@ -66,7 +66,7 @@ def test_rowwise(ps, logger, max_rows):
 
 def test_batched(ps, logger, max_rows):
     i = 0
-    for batch in _batched(_geom_generator(SRC_EPSG, num_rows=max_rows), 250):
+    for batch in _batched(_geom_generator(SRC_EPSG, num_rows=max_rows), 25):
         if i>= 1000:
             log_memory(ps, logger)
             i = 0
@@ -99,8 +99,8 @@ if __name__ == "__main__":
     start = datetime.now()
     logger.info(f"start {start}")
     try:
-        test_rowwise(process, logger, max_rows = 100_000_000)
-        # test_batched(process, logger, max_rows = 100_000_000)
+        test_rowwise(process, logger, max_rows = 10_000_000)
+        # test_batched(process, logger, max_rows = 10_000_000)
     finally:
         end = datetime.now()
         logger.info(f"end: {end}")
