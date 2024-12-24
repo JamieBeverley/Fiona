@@ -39,6 +39,6 @@ RUN curl -LO https://download.osgeo.org/gdal/3.7.0/gdal-3.7.0.tar.gz  && \
     cmake --build . && \
     cmake --build . --target install
 
-RUN pip install psutil
+RUN pip install psutil setuptools
 
 ENV LD_LIBRARY_PATH /usr/local/lib64:/usr/local/lib

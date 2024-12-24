@@ -17,11 +17,11 @@ start 2024-12-23 20:49:29.544013
 25700/100000000 (0%), mem: 49.8671875000MB, swap: 0.0000000000MB, 
 ```
 
-- the issue does not seem to occur when using a locally built/compiled GDAL (?).
+- the issue does not seem to occur when we don't use binary wheels from pypi:
   - in `Dockerfile` we build + install GDAL from source
   - then, on the container:
 ```
-pip install -e /fiona
+pip install --no-binary :all: fiona==1.10.1
 python /fiona/dev-container/memleak.py
 ```
 and see:
@@ -30,3 +30,6 @@ and see:
 ... # (no climb in mem, stays equivalent...)
 113500/100000000 (0%), mem: 57.6601562500MB, swap: 0.0000000000MB, 
 ```
+
+So presumably some mismatch between Amazon Linux 2023 and `manylinux` may be at
+root here?
